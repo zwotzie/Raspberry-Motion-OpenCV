@@ -1,0 +1,10 @@
+[Unit]
+Description=motionEye Server
+
+[Service]
+ExecStart=/usr/local/bin/meyectl startserver -c /home/pi/motioneye/etc/motioneye.conf
+Restart=on-abort
+User=pi
+
+[Install]
+WantedBy=multi-user.target
