@@ -56,7 +56,7 @@ vi config.txt
 reboot
 
 # install motionEye and some dependencies
-apt install vim ffmpeg v4l-utils libjpeg-dev libssl-dev libcurl4-openssl-dev python-dev
+apt install vim ffmpeg v4l-utils libjpeg-dev libssl-dev libcurl4-openssl-dev python-dev nginx
 pip install pycurl pytz motioneye sqlalchemy
 apt install python-pandas python-mysqldb ipython
 
