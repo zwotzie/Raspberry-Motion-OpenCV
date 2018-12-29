@@ -60,9 +60,10 @@ apt install vim ffmpeg v4l-utils libjpeg-dev libssl-dev libcurl4-openssl-dev pyt
 pip install pycurl pytz motioneye sqlalchemy
 apt install python-pandas python-mysqldb ipython
 
-mkdir /etc/motioneye
-cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
-vi /etc/motioneye/motioneye.conf 
+mkdir /home/pi/motioneye/etc
+cp /usr/local/share/motioneye/extra/motioneye.conf.sample /home/pi/motioneye/etc/motioneye.conf
+vi /home/pi/motioneye/etc/motioneye.conf 
+# this should be under /home/pi/motioneye but will be ignored by media_path
 mkdir /var/lib/motioneye
 cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
 
@@ -107,9 +108,14 @@ sql_query_stop update motion_events set end_time='%Y-%m-%d %T' where event_id=%{
 sql_query insert into images (camera, event_id, filename, frame_number, file_type, image_width, image_height, motion_center_x, motion_center_y, changed_pixels, noise_level, motion_area_height, motion_area_width, threshold) values('%t', %{dbeventid}, '%f', %q, %n, %w, %h, %K, %L, %D, %N, %J, %i, %o)
 ```
 
+### Some Peculiarities
 First thing what I'm mention is, that the *sql_query_top* is not working.
-
 I filed a bug to: https://github.com/Motion-Project/motion/issues/879
+
+Second, the mask is loosing all left squares after saving and reopening. That's kind of weird.
+
+media_path in motioneye.conf is ignored.
+
 
 ## Entering Debug Loging for Motion and MotionEye
 sometimes you need more logging information and this will help:
