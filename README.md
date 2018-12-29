@@ -2,8 +2,8 @@
 The purpose of this project is to analyze the eating habits of our cats.
 
 
-## Stauts of the Project
-Right now, I'm fine-tuning motion. "Motion" is responsible for taking 
+## Status of the Project
+Right now, I'm fine-tuning motion. Motion is responsible for taking 
 pictures when something moves in the camera. In reality, I do this in 
 MotionEye because it's easier and there's a GUI where I can see.
 
