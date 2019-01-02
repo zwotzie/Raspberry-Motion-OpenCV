@@ -125,10 +125,55 @@ vi /etc/motioneye/motioneye.conf
 log_level debug
 ```
 
-## Next Steps ML/CV
+## Next Steps ML - OpenCV - tensorflow
 Not jet implemented!
-- https://www.learnopencv.com
+- http://www.opencv.org/
+- https://www.learnopencv.com/
+- https://www.learnopencv.com/install-opencv-3-4-4-on-raspberry-pi/
 - https://blog.codecentric.de/2017/06/einfuehrung-in-computer-vision-mit-opencv-und-python/
 - https://github.com/tensorflow/tensorflow
-- http://www.opencv.org/
 - http://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/
+- https://www.youtube.com/watch?v=oXpsAiSajE0 TensorFlow Tutorial 2: Image Classification Walk-through
+- https://www.youtube.com/watch?v=rWFg6R5ccOc TensorFlow Tutorial 3: Object Detection Walk-through
+- https://www.tensorflow.org/
+- https://www.tensorflow.org/install/pip
+- https://www.thomas-krenn.com/de/wiki/CUDA_Installation_unter_Ubuntu
+- https://gist.github.com/Brainiarc7/470a57e5c9fc9ab9f9c4e042d5941a40
+- https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html
+- https://docs.nvidia.com/deeplearning/sdk/cudnn-support-matrix/index.html
+- https://github.com/tensorflow/tensorflow/issues/19375
+- http://www.robot.t.u-tokyo.ac.jp/~miyagusuku/deeplearning,/install/2018/10/01/dlbox_install.html
+- https://jupyter.org/
+- https://jupyter-notebook.readthedocs.io
+
+## check motion capture with imagemagick
+size=192x132
+centerlocation=+582+815
+locationnorthwest=+<582-(192/2)>+<815-(132/2)>
+
+convert orginal.jpg -gravity NorthWest -crop 192x132+486+749 +repage test.jpg
+
+## create csv for training data
+
+filename,width,height,class,xmin,ymin,xmax,ymax
+
+## Tensorflow
+### get tensorflow models:
+
+git clone https://github.com/tensorflow/models.git
+
+https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md
+
+// pip install protobuf
+
+sudo apt install protobuf-compiler
+
+pip install Cython contextlib2 pillow lxml matplotlib
+
+(venv) ~/git/github.com/tensorflow/models/research$ protoc object_detection/protos/*.proto --python_out=.
+
+git clone https://github.com/cocodataset/cocoapi.git
+cd cocoapi/PythonAPI
+make
+cp -r pycocotools <path_to_tensorflow>/models/research/
+
