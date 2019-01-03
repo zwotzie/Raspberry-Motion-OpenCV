@@ -1,4 +1,5 @@
 *
 */
 !.gitignore
-!label_map.pbtxt
+!*.pbtxt
+!*.config
