@@ -1,3 +1,4 @@
 *
 */
 !.gitignore
+!label_map.pbtxt
