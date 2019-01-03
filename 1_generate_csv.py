@@ -42,7 +42,7 @@ def main():
 #######################################################################################################################
 def path_to_csv(path):
     attribute_list = []
-    for file in glob.glob(path + '/*.jpg'):
+    for file in glob.glob(path + '/*/*.jpg'):
         basepath, basename = os.path.split(file)
         basepath, classification = os.path.split(basepath)
 
