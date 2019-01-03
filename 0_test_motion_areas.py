@@ -1,3 +1,7 @@
+# https://imagemagick.org/Usage/draw/
+# http://imagemagick.org/discourse-server/viewtopic.php?t=19591
+
+
 import os
 import glob
 import pandas as pd
@@ -59,7 +63,7 @@ def path_to_testimages(path):
         height = 1200
 
         file_output = MOTION_TEST_DIR + '/' + basename
-        cmd = 'convert %s -strokewidth 0 -fill "rgba( 255, 215, 0 , 0.5 )" -draw "rectangle %d,%d %d,%d " %s' % (file, xmin, ymin, xmax, ymax, file_output)
+        cmd = 'convert %s -strokewidth 0 -fill "rgba( 255, 215, 0 , 0.3 )" -draw "rectangle %d,%d %d,%d " %s' % (file, xmin, ymin, xmax, ymax, file_output)
 
         subprocess.call(cmd, shell=True)
 
