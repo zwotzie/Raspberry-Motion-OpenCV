@@ -54,10 +54,10 @@ def path_to_csv(path):
         area_width = int(splits[3])
         area_height = int(splits[4])
 
-        xmin = center_x - area_width / 2
-        xmax = center_x + area_width / 2
-        ymin = center_y - area_width / 2
-        ymax = center_y + area_width / 2
+        xmin = int(center_x - area_width / 2)
+        xmax = int(center_x + area_width / 2)
+        ymin = int(center_y - area_width / 2)
+        ymax = int(center_y + area_width / 2)
 
         # fix setting...
         width = 1600
