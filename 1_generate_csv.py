@@ -74,6 +74,19 @@ def path_to_csv(path):
         ymin = int(center_y - area_height / 2)
         ymax = int(center_y + area_height / 2)
 
+        # motion sometimes produces negative values:
+        if xmin < 0:
+            xmin = 0
+
+        if xmax < 0:
+            xmax = 0
+
+        if ymin < 0:
+            ymin = 0
+
+        if ymax < 0:
+            ymax = 0
+
         # fix setting...
         width = 1600
         height = 1200
