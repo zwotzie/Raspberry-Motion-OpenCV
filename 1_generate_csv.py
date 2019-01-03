@@ -49,10 +49,10 @@ def path_to_csv(path):
         # expect filename like: 'Camera1_10-51-53.02.192.132.178.582.815.jpg' (%Y-%m-%d/%{dbeventid}/%H-%M-%S.%q.%{dbeventid}.%i.%J.%K.%L)
         splits = basename.split('.')
 
-        center_x = splits[5]
-        center_y = splits[6]
-        area_width = splits[3]
-        area_height = splits[4]
+        center_x = int(splits[5])
+        center_y = int(splits[6])
+        area_width = int(splits[3])
+        area_height = int(splits[4])
 
         xmin = center_x - area_width / 2
         xmax = center_x + area_width / 2
