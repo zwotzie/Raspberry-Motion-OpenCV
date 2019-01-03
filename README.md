@@ -177,3 +177,4 @@ cd cocoapi/PythonAPI
 make
 cp -r pycocotools <path_to_tensorflow>/models/research/
 
+pip install labelImg
