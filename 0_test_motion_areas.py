@@ -4,7 +4,7 @@
 
 import os
 import glob
-import pandas as pd
+# import pandas as pd
 import subprocess
 
 # module level variables ##############################################################################################
@@ -58,11 +58,7 @@ def path_to_testimages(path):
         ymin = int(center_y - area_height / 2)
         ymax = int(center_y + area_height / 2)
 
-        # fix setting...
-        width = 1600
-        height = 1200
-
-        file_output = MOTION_TEST_DIR + '/' + basename
+        file_output = os.path.join(MOTION_TEST_DIR, basename)
         cmd = 'convert %s -strokewidth 0 -fill "rgba( 255, 215, 0 , 0.3 )" -draw "rectangle %d,%d %d,%d " %s' % (file, xmin, ymin, xmax, ymax, file_output)
 
         subprocess.call(cmd, shell=True)
