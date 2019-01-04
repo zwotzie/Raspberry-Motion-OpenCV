@@ -12,7 +12,7 @@ from distutils.version import StrictVersion
 # module level variables ##############################################################################################
 TEST_IMAGE_DIR = os.getcwd() +  "/test_images"
 FROZEN_INFERENCE_GRAPH_LOC = os.getcwd() + "/model/frozen_inference_graph.pb"
-LABELS_LOC = os.getcwd() + "/training/data/" + "label_map.pbtxt"
+LABELS_LOC = os.getcwd() + "/training_data/" + "label_map.pbtxt"
 NUM_CLASSES = 3
 
 #######################################################################################################################
