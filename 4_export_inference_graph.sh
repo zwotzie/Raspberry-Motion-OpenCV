@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+#
+# hmm in model/ there is already an frozen_inference_graph.pb
+#
 
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 #
@@ -9,6 +12,7 @@ PIPELINE_CONFIG_PATH=${BASEDIR}/training_data/ssd_inception_v2_coco.config
 INPUT_TYPE=image_tensor
 
 TRAINED_CKPT_PREFIX=${BASEDIR}/model
+
 EXPORT_DIR=${BASEDIR}/exported_model
 
 
