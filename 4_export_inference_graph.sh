@@ -11,7 +11,9 @@ PIPELINE_CONFIG_PATH=${BASEDIR}/training_data/ssd_inception_v2_coco.config
 
 INPUT_TYPE=image_tensor
 
-TRAINED_CKPT_PREFIX=${BASEDIR}/model
+NUM_TRAIN_STEPS=$1
+
+TRAINED_CKPT_PREFIX=${BASEDIR}/model/model.ckpt-${NUM_TRAIN_STEPS}
 
 EXPORT_DIR=${BASEDIR}/exported_model
 

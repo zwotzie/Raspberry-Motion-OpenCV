@@ -4,6 +4,7 @@ import numpy as np
 import os
 import tensorflow as tf
 import cv2
+import glob
 
 from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
@@ -11,7 +12,7 @@ from distutils.version import StrictVersion
 
 # module level variables ##############################################################################################
 TEST_IMAGE_DIR = os.getcwd() +  "/test_images"
-FROZEN_INFERENCE_GRAPH_LOC = os.getcwd() + "/model/frozen_inference_graph.pb"
+FROZEN_INFERENCE_GRAPH_LOC = os.getcwd() + "/exported_model/frozen_inference_graph.pb"
 LABELS_LOC = os.getcwd() + "/training_data/" + "label_map.pbtxt"
 NUM_CLASSES = 3
 
@@ -48,6 +49,9 @@ def main():
     category_index = label_map_util.create_category_index(categories)
 
     imageFilePaths = []
+
+    for file in glob.glob(TEST_IMAGE_DIR + '/*/*.jpg'):
+        basepath, basename = os.path.split(file)
     for imageFileName in os.listdir(TEST_IMAGE_DIR):
         if imageFileName.endswith(".jpg"):
             imageFilePaths.append(TEST_IMAGE_DIR + "/" + imageFileName)
