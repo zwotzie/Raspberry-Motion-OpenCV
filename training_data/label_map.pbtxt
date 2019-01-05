@@ -1,14 +1,19 @@
 item {
   id: 1
-  name: 'Mouse'
+  name: 'mouse'
 }
 
 item {
   id: 2
-  name: 'Dottie'
+  name: 'dottie'
 }
 
 item {
   id: 3
-  name: 'Minz'
+  name: 'minz'
 }
+
+item {
+    id: 4
+    name: 'undefined'
+  }
