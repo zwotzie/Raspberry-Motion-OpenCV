@@ -1,12 +1,14 @@
-# Welcome to My New Project
-The purpose of this project is to analyze the eating habits of our cats.
-
+# Welcome To Which Cat Is There Eating
+The purpose of this project is to analyze the eating habits of 
+our cats - or a mouse.
 
 ## Status of the Project
 Right now, I'm fine-tuning motion. Motion is responsible for taking 
 pictures when something moves in the camera. In reality, I do this in 
 MotionEye because it's easier and there's a GUI where I can see.
 
+Not sure if motion areas are quit good enough to train a tensorflow model.
+We will see.
 
 ## Hardware
 - Raspberry Pi 3B+
@@ -166,9 +168,15 @@ https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc
 
 // pip install protobuf
 
-sudo apt install protobuf-compiler
+sudo apt install protobuf-compiler python-dev python-tk 
+// https://github.com/NVIDIA/DIGITS/issues/187#issuecomment-126611403
+sudo apt install python3-dev python3-matplotlib
 
-pip install Cython contextlib2 pillow lxml matplotlib
+virtualenv --system-site-packages -p python3 ~/py3
+source ~/py3/bin/activate
+
+pip install tensorflow-gpu
+pip install Cython contextlib2 pillow lxml  jupyter
 
 (venv) ~/git/github.com/tensorflow/models/research$ protoc object_detection/protos/*.proto --python_out=.
 
@@ -178,3 +186,23 @@ make
 cp -r pycocotools <path_to_tensorflow>/models/research/
 
 pip install labelImg
+
+https://cloud.google.com/solutions/creating-object-detection-application-tensorflow
+http://download.tensorflow.org/models/object_detection/ssd_inception_v2_coco_11_06_2017.tar.gz
+... and put the content () in model/
+
+
+### Testing the Installation
+You can test that you have correctly installed the Tensorflow Object Detection
+API by running the following command:
+
+python object_detection/builders/model_builder_test.py
+
+### get it running...
+
+https://github.com/tensorflow/models/issues/3786#issuecomment-406601743
+
+sorry, but run it with python 2
+
+### Tensorboard
+tensorboard --logdir=${MODEL_DIR} --port 8008
