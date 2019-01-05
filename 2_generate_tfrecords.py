@@ -4,6 +4,9 @@
 # see his website here: https://towardsdatascience.com/how-to-train-your-own-object-detector-with-tensorflows-object-detector-api-bec72ecfe1d9
 # and his GitHub here: https://github.com/CDahmsTemp/TensorFlow_Tut_3_Object_Detection_Walk-through/blob/master/1_xml_to_csv.py
 
+# there is a difference between py2 and py3 division!
+from __future__ import division
+
 import os
 import io
 import pandas as pd
@@ -12,8 +15,6 @@ from PIL import Image
 from object_detection.utils import dataset_util
 from collections import namedtuple
 
-# there is a difference between py2 and py3 division!
-from __future__ import division
 
 # module-level variables ##############################################################################################
 
