@@ -60,8 +60,6 @@ def main():
         with tf.Session(graph=detection_graph) as sess:
             for image_path in imageFilePaths:
 
-                print(image_path)
-
                 image_np = cv2.imread(image_path)
 
                 if image_np is None:
@@ -87,7 +85,25 @@ def main():
                     feed_dict={image_tensor: image_np_expanded})
 
                 # print out, what was predicted
-                print(image_path, classes, scores)
+
+                objects = []
+                threshold = 0.5  # in order to get higher percentages you need to lower this number; usually at 0.01 you get 100% predicted objects
+                for index, value in enumerate(classes[0]):
+                    object_dict = {}
+                    if scores[0, index] > threshold:
+                        object_dict[(category_index.get(value)).get('name').encode('utf8')] = \
+                            scores[0, index]
+                        objects.append(object_dict)
+                # objects: [{b'mouse': 0.971244}]
+
+                # we assume there is only one object found:
+                try:
+                    classification = list(objects[0].keys())[0].decode("utf-8")
+                    score = round(objects[0][classification],2)*100
+                except IndexError:
+                    classification = "-"
+                    score = "-"
+                print("%s : %s : %s %" % (image_path, classification, score))
 
                 # Visualization of the results of a detection.
                 vis_util.visualize_boxes_and_labels_on_image_array(image_np,
