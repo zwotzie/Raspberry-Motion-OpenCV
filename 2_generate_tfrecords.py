@@ -161,7 +161,7 @@ def createTfExample(singleFileData, path):
         'image/object/class/text': dataset_util.bytes_list_feature(classesAsText),
         'image/object/class/label': dataset_util.int64_list_feature(classesAsInts)}))
 
-    print(height, width, fileName, tensorFlowImage, imageFormat, xMins, xMaxs, yMins, yMaxs, classesAsText, classesAsInts)
+    print(height, width, fileName, 'tensorFlowImage', imageFormat, xMins, xMaxs, yMins, yMaxs, classesAsText, classesAsInts)
     return tfExample
 # end function
 
