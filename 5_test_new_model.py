@@ -93,8 +93,8 @@ def main():
                                                                    category_index,
                                                                    use_normalized_coordinates=True,
                                                                    line_thickness=8)
-                cv2.resizeWindow('image_np', 800, 600)
-                cv2.imshow("image_np", image_np)
+                resized_image = cv2.resize(image_np, (0, 0), fx=0.8, fy=0.8)
+                cv2.imshow("image_np", resized_image)
                 cv2.waitKey()
             # end for
         # end with
