@@ -12,6 +12,9 @@ from PIL import Image
 from object_detection.utils import dataset_util
 from collections import namedtuple
 
+# there is a difference between py2 and py3 division!
+from __future__ import division
+
 # module-level variables ##############################################################################################
 
 # input training CSV file and training images directory
