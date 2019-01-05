@@ -50,13 +50,11 @@ def main():
 
     imageFilePaths = []
 
-    for file in glob.glob(TEST_IMAGE_DIR + '/*/*.jpg'):
-        basepath, basename = os.path.split(file)
-    for imageFileName in os.listdir(TEST_IMAGE_DIR):
-        if imageFileName.endswith(".jpg"):
-            imageFilePaths.append(TEST_IMAGE_DIR + "/" + imageFileName)
-        # end if
-    # end for
+    for child_dir in [f.path for f in os.scandir(TEST_IMAGE_DIR) if f.is_dir()]:
+        for imageFileName in os.listdir(child_dir):
+            if imageFileName.endswith(".jpg"):
+                imageFilePaths.append(child_dir + "/" + imageFileName)
+
 
     with detection_graph.as_default():
         with tf.Session(graph=detection_graph) as sess:
@@ -95,6 +93,7 @@ def main():
                                                                    category_index,
                                                                    use_normalized_coordinates=True,
                                                                    line_thickness=8)
+                cv2.resizeWindow('image_np', 800, 600)
                 cv2.imshow("image_np", image_np)
                 cv2.waitKey()
             # end for
