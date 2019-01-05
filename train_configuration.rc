@@ -1,0 +1,17 @@
+# source this for configuration variables
+
+BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+#
+# pipline config contains label_map
+PIPELINE_CONFIG_PATH=${BASEDIR}/training_data/ssd_inception_v2_coco.config
+# {path to model directory}
+MODEL_DIR=${BASEDIR}/model
+
+NUM_TRAIN_STEPS=20000
+NUM_EVAL_STEPS=500
+SAMPLE_1_OF_N_EVAL_EXAMPLES=1
+
+# for export the model:
+INPUT_TYPE=image_tensor
+TRAINED_CKPT_PREFIX=${BASEDIR}/model/model.ckpt-${NUM_TRAIN_STEPS}
+EXPORT_MODEL_DIR=${BASEDIR}/exported_model
