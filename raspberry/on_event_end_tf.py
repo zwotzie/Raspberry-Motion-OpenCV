@@ -12,8 +12,9 @@ from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 
 NUM_CLASSES = 3
-FROZEN_INFERENCE_GRAPH_LOC = os.getcwd() + "/exported_model/frozen_inference_graph.pb"
-LABELS_LOC = os.getcwd() + "/training_data/" + "label_map.pbtxt"
+BASEPATH="/home/pi/Raspberry-Motion-OpenCV"
+FROZEN_INFERENCE_GRAPH_LOC = BASEPATH + "/exported_model/frozen_inference_graph.pb"
+LABELS_LOC = BASEPATH + "/training_data/" + "label_map.pbtxt"
 
 db = create_engine('mysql://motion:mypasswordformotion!@localhost/motion')
 metadata = MetaData(db)
