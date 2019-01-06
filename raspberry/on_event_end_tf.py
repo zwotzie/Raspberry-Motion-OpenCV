@@ -132,7 +132,7 @@ def set_motion_evens_values(event_id):
 
     classification = most_valueable_class
 
-    print event_id, number_of_images, start_time, end_time, changed_pixels_median, classification
+    print(event_id, number_of_images, start_time, end_time, changed_pixels_median, classification)
 
     motion_events.update(motion_events.c.event_id == event_id).execute(
         changed_pixels_median=changed_pixels_median
@@ -146,7 +146,7 @@ def get_int(s):
 
 def main():
     if len(argv) != 2:
-        print "Usage: on_event_end.py ['all', <event_id>]"
+        print("Usage: on_event_end.py ['all', <event_id>]")
         exit(1)
 
     elif argv[1] == 'all':
