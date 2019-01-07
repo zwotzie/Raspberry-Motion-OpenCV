@@ -7,7 +7,7 @@ MODEL_NAME=ssd_mobilenet_v1_coco_11_06_2017
 PIPELINE_CONFIG_PATH=${BASEDIR}/training_data/ssd_inception_v2_coco.config
 # {path to model directory}
 MODEL_DIR=${BASEDIR}/model
-PRETRAINED_MODEL_DIR=${BASEDIR}/model_virgin/${MODEL_NAME}
+PRETRAINED_MODEL_DIR=${BASEDIR}/graph_def/${MODEL_NAME}
 
 NUM_TRAIN_STEPS=20000
 NUM_EVAL_STEPS=500
