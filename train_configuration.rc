@@ -4,7 +4,7 @@ BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 #
 MODEL_NAME=ssd_mobilenet_v1_coco_11_06_2017
 # pipline config contains label_map
-PIPELINE_CONFIG_PATH=${BASEDIR}/training_data/ssd_inception_v2_coco.config
+PIPELINE_CONFIG_PATH=${BASEDIR}/training_data/ssd_mobilenet_v1_coco.config
 # {path to model directory}
 MODEL_DIR=${BASEDIR}/model
 PRETRAINED_MODEL_DIR=${BASEDIR}/graph_def/${MODEL_NAME}
