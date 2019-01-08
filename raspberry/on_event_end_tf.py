@@ -115,8 +115,9 @@ def set_motion_evens_values(event_id):
 
                 # we assume there is only one object found:
                 try:
-                    classification = list(objects[0].keys())[0].decode("utf-8")
-                    score = round(objects[0][classification], 2) * 100
+                    classification = list(objects[0].keys())[0]
+                    score = round(objects[0][classification],2)*100
+                    classification = classification.decode("utf-8")
                 except IndexError:
                     classification = None
                     score = 0
