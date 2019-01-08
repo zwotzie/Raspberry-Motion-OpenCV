@@ -129,10 +129,13 @@ def set_motion_evens_values(event_id):
 
     # pdSeries = df.groupby('class')['score'].mean()
     # df2 = pd.DataFrame({'class': pdSeries.index, 'score': pdSeries.values})
-    grouped = df.groupby('class').sum()
-    most_valueable_class = grouped.score.idxmax()
+    try:
+        grouped = df.groupby('class').sum()
+        most_valueable_class = grouped.score.idxmax()
 
-    classification = most_valueable_class
+        classification = most_valueable_class
+    except ValueError: #attempt to get argmax of an empty sequence
+        classification = 'unknown'
 
     print(event_id, number_of_images, start_time, end_time, changed_pixels_median, classification)
 
