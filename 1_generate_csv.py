@@ -15,8 +15,8 @@ MIN_NUM_IMAGES_REQUIRED_FOR_TESTING = 3
 
 # output .csv file names/locations
 TRAINING_DATA_DIR = os.getcwd() + "/" + "training_data"
-TRAIN_CSV_FILE_LOC = TRAINING_DATA_DIR + "/" + "train_labels.csv"
-EVAL_CSV_FILE_LOC = TRAINING_DATA_DIR + "/" + "eval_labels.csv"
+TRAIN_CSV_FILE = "train_labels-%s.csv"
+EVAL_CSV_FILE = "eval_labels-%s.csv"
 
 #######################################################################################################################
 def main():
@@ -26,23 +26,24 @@ def main():
 
     # convert training xml data to a single .csv file
     print("converting xml training data . . .")
-    trainCsvResults = path_to_csv(TRAINING_IMAGES_DIR)
-    trainCsvResults.to_csv(TRAIN_CSV_FILE_LOC, index=None)
-    print("training xml to .csv conversion successful, saved result to " + TRAIN_CSV_FILE_LOC)
+    path_to_csv(TRAINING_IMAGES_DIR, TRAIN_CSV_FILE)
+    print("training xml to .csv conversion successful, saved result to " + TRAINING_DATA_DIR)
 
     # convert test xml data to a single .csv file
     print("converting xml test data . . .")
-    testCsvResults = path_to_csv(TEST_IMAGES_DIR)
-    testCsvResults.to_csv(EVAL_CSV_FILE_LOC, index=None)
-    print("test xml to .csv conversion successful, saved result to " + EVAL_CSV_FILE_LOC)
+    path_to_csv(TEST_IMAGES_DIR, EVAL_CSV_FILE)
+    print("test xml to .csv conversion successful, saved result to " + TRAINING_DATA_DIR)
 
 # end main
 
 
 #######################################################################################################################
-def path_to_csv(path):
+def path_to_csv(path, to_csv_pattern):
+    column_name = ['classification', 'filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
     attribute_list = []
+
     for file in glob.glob(path + '/*/*.jpg'):
+
         basepath, basename = os.path.split(file)
         basepath, classification = os.path.split(basepath)
 
@@ -91,13 +92,20 @@ def path_to_csv(path):
         width = 1600
         height = 1200
 
-        attribute_list.append((classification+'/'+basename, width, height, classification, xmin, ymin, xmax, ymax))
+        attribute_list.append((classification, classification+'/'+basename, width, height, classification, xmin, ymin, xmax, ymax))
 
         # end for
 
-    column_name = ['filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
-    file_df = pd.DataFrame(attribute_list, columns=column_name)
-    return file_df
+    pre_file_df = pd.DataFrame(attribute_list, columns=column_name)
+
+    for classification in pre_file_df.classification.unique():
+        print("CLASS=%s" % classification)
+        file_df = pre_file_df.loc[pre_file_df['classification'] == classification]
+        file_df.drop(['classification'], axis=1)
+        csv_filename = to_csv_pattern % classification
+        csv_filename = os.path.join(TRAINING_DATA_DIR, csv_filename)
+        file_df.to_csv(csv_filename, index=None)
+
 # end function
 
 #######################################################################################################################
