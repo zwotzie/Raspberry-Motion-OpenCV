@@ -104,7 +104,7 @@ def set_motion_evens_values(event_id):
                     feed_dict={image_tensor: image_np_expanded})
 
                 objects = []
-                threshold = 0.5  # in order to get higher percentages you need to lower this number; usually at 0.01 you get 100% predicted objects
+                threshold = 0.2  # in order to get higher percentages you need to lower this number; usually at 0.01 you get 100% predicted objects
                 for index, value in enumerate(classes[0]):
                     object_dict = {}
                     if scores[0, index] > threshold:
@@ -116,7 +116,7 @@ def set_motion_evens_values(event_id):
                 # we assume there is only one object found:
                 try:
                     classification = list(objects[0].keys())[0]
-                    score = round(objects[0][classification],2)*100
+                    score = round(objects[0][classification] * 100, 2)
                     classification = classification.decode("utf-8")
                 except IndexError:
                     classification = None
