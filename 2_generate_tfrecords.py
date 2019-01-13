@@ -64,6 +64,7 @@ def writeTfRecordFile(csvFileName, tfRecordFileName, imagesDir):
     # for each file (not each line) in the CSV file data . . .
     # (each image/.xml file pair can have more than one box, and therefore more than one line for that file in the CSV file)
     for singleFileData in csvFileDataList:
+        # ToDo: some kind of statistic output
         tfExample = createTfExample(singleFileData, imagesDir)
         tfRecordWriter.write(tfExample.SerializeToString())
     # end for
