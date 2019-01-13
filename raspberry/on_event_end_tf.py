@@ -5,14 +5,14 @@ from sqlalchemy import Table, MetaData
 import pandas as pd
 import numpy as np
 from sys import argv, exit
-import os
 import cv2
 import tensorflow as tf
 from object_detection.utils import label_map_util
-from object_detection.utils import visualization_utils as vis_util
+import os
+
 
 NUM_CLASSES = 3
-BASEPATH="/home/pi/Raspberry-Motion-OpenCV"
+BASEPATH = os.getenv('BASEPATH', "/home/pi/Raspberry-Motion-OpenCV")
 FROZEN_INFERENCE_GRAPH_LOC = BASEPATH + "/exported_model/frozen_inference_graph.pb"
 LABELS_LOC = BASEPATH + "/training_data/" + "label_map.pbtxt"
 
@@ -28,21 +28,8 @@ motion_events = Table('motion_events', metadata, autoload=True)
 # filter all rows where column x is None/null
 # print(df.loc[df['changed_pixels_median'].isnull()])
 
-query_median = """
-SELECT round(AVG(dd.changed_pixels), 0) as changed_pixels_median
-FROM (
-SELECT d.changed_pixels, @rownum:=@rownum+1 as row_number, @total_rows:=@rownum
-  FROM images d, (SELECT @rownum:=0) r
-  WHERE d.changed_pixels is NOT NULL
-  and event_id = %d
-  ORDER BY d.changed_pixels
-) as dd
-WHERE dd.row_number IN ( FLOOR((@total_rows+1)/2), FLOOR((@total_rows+2)/2) )
-"""
 
-# query_filenames = "SELECT filename FROM images WHERE event_id = %d"
-
-def set_motion_evens_values(event_id):
+def set_motion_events_values(event_id):
 
     query = 'SELECT * FROM images WHERE event_id = %d' % event_id
     df = pd.read_sql_query(query, db)
@@ -65,7 +52,6 @@ def set_motion_evens_values(event_id):
         # 32 images to analyse should be enough
         # index starts with 10 so
         df.drop(df.index[:41], inplace=True)
-
 
     detection_graph = tf.Graph()
     with detection_graph.as_default():
@@ -116,7 +102,7 @@ def set_motion_evens_values(event_id):
                 # we assume there is only one object found:
                 try:
                     classification = list(objects[0].keys())[0]
-                    score = round(objects[0][classification] * 100, 2)
+                    score = round(objects[0][classification] * 100)
                     classification = classification.decode("utf-8")
                 except IndexError:
                     classification = None
@@ -146,8 +132,10 @@ def set_motion_evens_values(event_id):
         , number_of_images=number_of_images
         , classification=classification)
 
+
 def get_int(s):
         return int(s)
+
 
 def main():
     if len(argv) != 2:
@@ -157,11 +145,11 @@ def main():
     elif argv[1] == 'all':
         df = pd.read_sql_query('SELECT * FROM motion_events', db)
         for event_id in df['event_id']:
-            set_motion_evens_values(event_id)
+            set_motion_events_values(event_id)
 
     elif argv[1]:
         event_id = get_int(argv[1])
-        set_motion_evens_values(event_id)
+        set_motion_events_values(event_id)
 
 
 if __name__ == '__main__':
