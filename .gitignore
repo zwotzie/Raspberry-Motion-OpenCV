@@ -1,4 +1,6 @@
 .idea
 
+.ipynb_checkpoints
+
 # cp -a tensorflow models/research/object_detection .
 object_detection/
