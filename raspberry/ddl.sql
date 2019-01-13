@@ -1,7 +1,7 @@
 CREATE DATABASE motion;
 CREATE USER 'motion'@'localhost' IDENTIFIED BY 'mypasswordformotion!';
 GRANT ALL ON motion.* TO 'motion'@'localhost';
-FLUSH PRIVILEDGES;
+FLUSH PRIVILEGES;
 
 USE motion;
 
