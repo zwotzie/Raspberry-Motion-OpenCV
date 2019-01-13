@@ -10,6 +10,8 @@ MotionEye because it's easier and there's a GUI where I can see.
 Not sure if motion areas are quit good enough to train a tensorflow model.
 We will see.
 
+The areas for small parts (the mouse) is not good enough. I used labelImg for that.
+
 ## Hardware
 - Raspberry Pi 3B+
 - NightVision Camera
@@ -111,7 +113,7 @@ sql_query insert into images (camera, event_id, filename, frame_number, file_typ
 ```
 
 ### Some Peculiarities
-First thing what I'm mention is, that the *sql_query_top* is not working.
+First thing what I'm mention is, that the *sql_query_stop* is not working.
 I filed a bug to: https://github.com/Motion-Project/motion/issues/879
 
 Second, the mask is loosing all left squares after saving and reopening. That's kind of weird.
@@ -188,9 +190,10 @@ cp -r pycocotools <path_to_tensorflow>/models/research/
 pip install labelImg
 
 https://cloud.google.com/solutions/creating-object-detection-application-tensorflow
+
 http://download.tensorflow.org/models/object_detection/ssd_inception_v2_coco_11_06_2017.tar.gz
 ... and put the content () in model/
-
+https://github.com/tensorflow/models/blob/master/research/object_detection/samples/configs
 
 ### Testing the Installation
 You can test that you have correctly installed the Tensorflow Object Detection
