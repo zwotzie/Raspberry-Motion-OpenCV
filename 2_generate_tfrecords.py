@@ -174,6 +174,7 @@ def classAsTextToClassAsInt(classAsText):
 
     # ToDo: If you have more than one classification, add an if statement for each
     # ToDo: i.e. if you have 3 classes, you would have 3 if statements and then the else
+    # ToDo read from training_data the label_map.pbtxt!
 
     if classAsText == 'mouse':
         return 1
