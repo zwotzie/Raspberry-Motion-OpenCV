@@ -42,7 +42,9 @@ def main():
     # end with
 
     # Loading label map
-    # Label maps map indices to category names, so that when our convolution network predicts `5`, we know that this corresponds to `airplane`.  Here we use internal utility functions, but anything that returns a dictionary mapping integers to appropriate string labels would be fine
+    # Label maps map indices to category names, so that when our convolution network predicts `5`,
+    # we know that this corresponds to `airplane`.  Here we use internal utility functions,
+    # but anything that returns a dictionary mapping integers to appropriate string labels would be fine
     label_map = label_map_util.load_labelmap(LABELS_LOC)
     categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES,
                                                                 use_display_name=True)
@@ -87,24 +89,23 @@ def main():
                 # print out, what was predicted
 
                 objects = []
-                threshold = 0.5  # in order to get higher percentages you need to lower this number; usually at 0.01 you get 100% predicted objects
+                threshold = 0.2  # in order to get higher percentages you need to lower this number; usually at 0.01 you get 100% predicted objects
                 for index, value in enumerate(classes[0]):
                     object_dict = {}
                     if scores[0, index] > threshold:
-                        object_dict[(category_index.get(value)).get('name').encode('utf8')] = \
-                            scores[0, index]
+                        object_dict[(category_index.get(value)).get('name').encode('utf8')] = scores[0, index]
                         objects.append(object_dict)
                 # objects: [{b'mouse': 0.971244}]
-
+                # print(objects)
                 # we assume there is only one object found:
                 try:
                     classification = list(objects[0].keys())[0]
-                    score = round(objects[0][classification],2)*100
+                    score = round(objects[0][classification] * 100, 2)
                     classification = classification.decode("utf-8")
-                except IndexError:
+                except:
                     classification = "-"
                     score = "-"
-                print("%s : %s : %s %" % (image_path, classification, score))
+                print("%s : %s : %r " % (image_path, classification, score))
 
                 # Visualization of the results of a detection.
                 vis_util.visualize_boxes_and_labels_on_image_array(image_np,
