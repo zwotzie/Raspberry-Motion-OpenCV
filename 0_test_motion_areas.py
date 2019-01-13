@@ -9,6 +9,7 @@ import subprocess
 
 # module level variables ##############################################################################################
 # train and test directories
+# ToDo refactor with input parameter
 TEST_IMAGES_DIR = os.getcwd() + "/test_images/"
 MOTION_TEST_DIR = os.getcwd() + "/test_images_motion_area/"
 
