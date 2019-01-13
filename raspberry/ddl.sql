@@ -4,7 +4,7 @@ GRANT ALL ON motion.* TO 'motion'@'localhost';
 FLUSH PRIVILEGES;
 
 USE motion;
-
+--  ToDo most int's could be mediumint unsigned
 CREATE TABLE images (
   id int not null primary key auto_increment
 , event_id int
@@ -21,7 +21,9 @@ CREATE TABLE images (
 , motion_area_width int
 , threshold int
 , camera int
-, creation_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+, classification enum('minz', 'dottie', 'mouse', 'unknown')
+, score tinyint
+, creation_time timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE motion_events (
@@ -35,3 +37,4 @@ CREATE TABLE motion_events (
 );
 
 ALTER TABLE motion_events AUTO_INCREMENT=27;
+
