@@ -101,7 +101,7 @@ def path_to_csv(path, to_csv_pattern):
     for classification in pre_file_df.classification.unique():
         print("CLASS=%s" % classification)
         file_df = pre_file_df.loc[pre_file_df['classification'] == classification]
-        file_df.drop(['classification'], axis=1)
+        file_df = file_df.drop(['classification'], axis=1)
         csv_filename = to_csv_pattern % classification
         csv_filename = os.path.join(TRAINING_DATA_DIR, csv_filename)
         file_df.to_csv(csv_filename, index=None)
