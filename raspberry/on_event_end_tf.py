@@ -50,8 +50,7 @@ def set_motion_events_values(event_id):
         df = df.apply(np.random.permutation)
 
         # 32 images to analyse should be enough
-        # index starts with 10 so
-        df.drop(df.index[:41], inplace=True)
+        df.drop(df.index[32:], inplace=True)
 
     detection_graph = tf.Graph()
     with detection_graph.as_default():
