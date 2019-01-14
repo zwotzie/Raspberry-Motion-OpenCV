@@ -13,10 +13,13 @@ import os
 
 NUM_CLASSES = 3
 BASEPATH = os.getenv('BASEPATH', "/home/pi/Raspberry-Motion-OpenCV")
+IMAGE_PATH_ORG = os.getenv('IMAGE_PATH_ORG')
+IMAGE_PATH_REPLACE = os.getenv('IMAGE_PATH_REPLACE')
 FROZEN_INFERENCE_GRAPH_LOC = BASEPATH + "/exported_model/frozen_inference_graph.pb"
 LABELS_LOC = BASEPATH + "/training_data/" + "label_map.pbtxt"
 
-db = create_engine('mysql://motion:mypasswordformotion!@localhost/motion')
+MYSQL_HOST = os.getenv('MYSQL_HOST', 'localhost')
+db = create_engine('mysql://motion:mypasswordformotion!@' + MYSQL_HOST + '/motion')
 metadata = MetaData(db)
 
 # debug mode in ipython, otherwise False!
@@ -51,6 +54,8 @@ def set_motion_events_values(event_id):
 
         # 32 images to analyse should be enough
         df.drop(df.index[32:], inplace=True)
+    if IMAGE_PATH_REPLACE:
+        df.replace({'filename': r'^'+IMAGE_PATH_ORG}, {'filename': IMAGE_PATH_REPLACE}, regex=True, inplace=True)
 
     detection_graph = tf.Graph()
     with detection_graph.as_default():
@@ -106,7 +111,7 @@ def set_motion_events_values(event_id):
                 except IndexError:
                     classification = None
                     score = 0
-                # print("%s : %s : %s %" % (image_path, classification, score))
+                # print("%s : %s : %r" % (image_path, classification, score))
 
                 idx = df[df['filename'] == image_path].index.values.astype(int)[0]
                 df.loc[idx, 'score'] = score
