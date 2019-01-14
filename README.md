@@ -151,11 +151,7 @@ Not jet implemented!
 - https://jupyter-notebook.readthedocs.io
 
 ## check motion capture with imagemagick
-size=192x132
-centerlocation=+582+815
-locationnorthwest=+<582-(192/2)>+<815-(132/2)>
-
-convert orginal.jpg -gravity NorthWest -crop 192x132+486+749 +repage test.jpg
+therefore is a script 0_test_motion_areas.py
 
 ## create csv for training data
 
@@ -187,13 +183,17 @@ cd cocoapi/PythonAPI
 make
 cp -r pycocotools <path_to_tensorflow>/models/research/
 
-pip install labelImg
-
 https://cloud.google.com/solutions/creating-object-detection-application-tensorflow
 
 http://download.tensorflow.org/models/object_detection/ssd_inception_v2_coco_11_06_2017.tar.gz
+http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_11_06_2017.tar.gz
 ... and put the content () in model/
 https://github.com/tensorflow/models/blob/master/research/object_detection/samples/configs
+
+### label the images, if you have to
+pip install labelImg
+
+but first i will try to get good results with motion areas.
 
 ### Testing the Installation
 You can test that you have correctly installed the Tensorflow Object Detection
