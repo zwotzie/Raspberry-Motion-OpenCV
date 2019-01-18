@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CatCam</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="chart" id="bargraphCats">
+                <script>
+                    var graphsC = {{plotCats | safe}};
+                    Plotly.plot('bargraphCats',graphsC,{});
+                </script>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart" id="bargraphOthers">
+                <script>
+                    var graphsO = {{plotOthers | safe}};
+                    Plotly.plot('bargraphOthers',graphsO,{});
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
