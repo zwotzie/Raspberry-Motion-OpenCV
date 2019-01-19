@@ -33,7 +33,7 @@ stmt = """SELECT
   ELSE classification
   END AS classification
   FROM motion_events 
-WHERE start_time > date_sub(now(), interval 3 day) 
+WHERE start_time > date_sub(now(), interval %d day) 
   AND number_of_images > 20
 """
 
@@ -47,18 +47,19 @@ metadata = MetaData(db)
 motion_events = Table('motion_events', metadata, autoload=True)
 
 
-@app.route('/cat')
-def index():
+@app.route('/cat/<int:days>')
+def index(days=2):
     feature = 'Bar'
     # bar = create_plot(feature)
-    graphJSONCats, graphJSONothers = catcam()
+    graphJSONCats, graphJSONothers = catcam(days)
     return render_template('index.html', plotCats=graphJSONCats, plotOthers=graphJSONothers)
 
 
-def catcam():
-    df = pd.read_sql_query(stmt, db)
+def catcam(days):
+    df = pd.read_sql_query(stmt % days, db)
     x_to = datetime.now()
-    x_from = x_to - timedelta(days=3)
+    x_from = x_to - timedelta(days=days)
+
     data_cats = []
     data_others = []
     for classification in df['classification'].unique():
@@ -74,12 +75,12 @@ def catcam():
             data_others.append(part)
 
         layoutCats = dict(
-            title="Minz, Dottie, andere Katze(?)",
+            title="Minz, Dottie, andere Katze(?) (%d Tage)" % days,
             xaxis=dict(
                 range=[x_from, x_to])
         )
         layoutOthers = dict(
-            title="Maus und unbekannte Events",
+            title="Maus und unbekannte Events (%d Tage)" % days,
             xaxis=dict(
                 range=[x_from, x_to])
         )
