@@ -47,6 +47,7 @@ metadata = MetaData(db)
 motion_events = Table('motion_events', metadata, autoload=True)
 
 
+@app.route('/cat')
 @app.route('/cat/<int:days>')
 def index(days=2):
     feature = 'Bar'
