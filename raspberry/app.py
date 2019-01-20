@@ -78,12 +78,20 @@ def catcam(days):
         layoutCats = dict(
             title="Minz, Dottie, andere Katze(?) (%d Tage)" % days,
             xaxis=dict(
-                range=[x_from, x_to])
+                range=[x_from, x_to]),
+            yaxis=dict(
+                title='Minuten'
+            ),
+            showlegend=True
         )
         layoutOthers = dict(
             title="Maus und unbekannte Events (%d Tage)" % days,
             xaxis=dict(
-                range=[x_from, x_to])
+                range=[x_from, x_to]),
+            yaxis=dict(
+                title='Minuten'
+            ),
+            showlegend=True
         )
 
         figCats = dict(data=data_cats, layout=layoutCats)
