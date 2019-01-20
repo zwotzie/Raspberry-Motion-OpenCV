@@ -1,0 +1,10 @@
+[Unit]
+Description=Flask Server to show statistics
+
+[Service]
+ExecStart=/home/pi/Raspberry-Motion-OpenCV/raspberry/start_flask.sh
+Restart=on-abort
+User=pi
+
+[Install]
+WantedBy=multi-user.target
