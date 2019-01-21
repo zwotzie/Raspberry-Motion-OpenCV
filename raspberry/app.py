@@ -12,7 +12,7 @@ import numpy as np
 import json
 import os
 from datetime import datetime, timedelta
-
+os.environ['TZ'] = 'Europe/Berlin'
 
 
 app = Flask(__name__)
