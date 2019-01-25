@@ -16,3 +16,13 @@ on_event_end.py: was the first script which updates the table motion_events
 on_event_end_tf.py is the extension with tensorflow to classify what cat is eating and when
 
 on_event_end.sh is the script which will trigger the python script above and may be later more
+
+
+
+```
+sudo su -
+cp raspberry/system/etc/sytemd/system/flask.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable flask
+systemctl start flask
+```

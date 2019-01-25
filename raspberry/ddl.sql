@@ -38,3 +38,7 @@ CREATE TABLE motion_events (
 
 ALTER TABLE motion_events AUTO_INCREMENT=27;
 
+-- shell commands for timezone support: https://mariadb.com/kb/en/library/mysql_tzinfo_to_sql/
+mysql_tzinfo_to_sql  /usr/share/zoneinfo/Europe/Berlin 'Europe/Berlin' | mysql -u root mysql
+mysql_tzinfo_to_sql  /usr/share/zoneinfo/UTC 'UTC' | mysql -u root mysql
+

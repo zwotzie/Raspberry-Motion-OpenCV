@@ -46,18 +46,18 @@ metadata = MetaData(db)
 
 motion_events = Table('motion_events', metadata, autoload=True)
 
-
+@app.route('/')
 @app.route('/cat')
 @app.route('/cat/<int:days>')
 def index(days=2):
     feature = 'Bar'
     # bar = create_plot(feature)
-    graphJSONCats, graphJSONothers = catcam(days)
-    return render_template('index.html', plotCats=graphJSONCats, plotOthers=graphJSONothers)
+    graphJSONCats, graphJSONothers, htmltable = catcam(days)
+    return render_template('index.html', plotCats=graphJSONCats, plotOthers=graphJSONothers, table=htmltable)
 
 
 def catcam(days):
-    df = pd.read_sql_query(stmt % days, db)
+    df = pd.read_sql_query(stmt % days, db, )
     x_to = datetime.now()
     x_from = x_to - timedelta(days=days)
 
@@ -82,7 +82,8 @@ def catcam(days):
             yaxis=dict(
                 title='Minuten'
             ),
-            showlegend=True
+            showlegend=True,
+            # legend=dict(orientation="h")
         )
         layoutOthers = dict(
             title="Maus und unbekannte Events (%d Tage)" % days,
@@ -91,7 +92,8 @@ def catcam(days):
             yaxis=dict(
                 title='Minuten'
             ),
-            showlegend=True
+            showlegend=True,
+            # legend=dict(orientation="h")
         )
 
         figCats = dict(data=data_cats, layout=layoutCats)
@@ -99,8 +101,10 @@ def catcam(days):
 
         graphJSONCats = json.dumps(figCats, cls=plotly.utils.PlotlyJSONEncoder)
         graphJSONothers = json.dumps(figOthers, cls=plotly.utils.PlotlyJSONEncoder)
+        df.sort_values(by='start_time', inplace=True, ascending=False)
+        htmltable=df.to_html(index=False, classes="table table-striped table-bordered table-hover table-sm")
 
-    return graphJSONCats, graphJSONothers
+    return graphJSONCats, graphJSONothers, htmltable
 
 if __name__ == '__main__':
     app.run()
