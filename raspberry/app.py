@@ -49,7 +49,7 @@ motion_events = Table('motion_events', metadata, autoload=True)
 @app.route('/')
 @app.route('/cat')
 @app.route('/cat/<int:days>')
-def index(days=2):
+def index(days=1):
     feature = 'Bar'
     # bar = create_plot(feature)
     graphJSONCats, graphJSONothers, htmltable = catcam(days)
