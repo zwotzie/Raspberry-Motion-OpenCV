@@ -135,12 +135,13 @@ Not jet implemented!
 - https://www.learnopencv.com/
 - https://www.learnopencv.com/install-opencv-3-4-4-on-raspberry-pi/
 - https://blog.codecentric.de/2017/06/einfuehrung-in-computer-vision-mit-opencv-und-python/
-- https://github.com/tensorflow/tensorflow
 - http://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/
 - https://www.youtube.com/watch?v=oXpsAiSajE0 TensorFlow Tutorial 2: Image Classification Walk-through
 - https://www.youtube.com/watch?v=rWFg6R5ccOc TensorFlow Tutorial 3: Object Detection Walk-through
 - https://www.tensorflow.org/
 - https://www.tensorflow.org/install/pip
+- https://github.com/tensorflow/tensorflow
+- https://medium.com/mostly-ai/tensorflow-records-what-they-are-and-how-to-use-them-c46bc4bbb564
 - https://www.thomas-krenn.com/de/wiki/CUDA_Installation_unter_Ubuntu
 - https://gist.github.com/Brainiarc7/470a57e5c9fc9ab9f9c4e042d5941a40
 - https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html
