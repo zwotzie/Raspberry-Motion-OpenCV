@@ -26,3 +26,12 @@ systemctl daemon-reload
 systemctl enable flask
 systemctl start flask
 ```
+
+## Some Links Good To Read
+may look at:
+
+https://github.com/lhelontra/tensorflow-on-arm
+https://cloud.google.com/solutions/creating-object-detection-application-tensorflow
+https://github.com/GoogleCloudPlatform/tensorflow-object-detection-example/blob/master/object_detection_app/app.py
+https://medium.com/nanonets/how-to-easily-detect-objects-with-deep-learning-on-raspberrypi-225f29635c74
+https://github.com/NanoNets/RaspberryPi-ObjectDetection-TensorFlow
