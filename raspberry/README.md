@@ -18,9 +18,58 @@ on_event_end_tf.py is the extension with tensorflow to classify what cat is eati
 on_event_end.sh is the script which will trigger the python script above and may be later more
 
 
-
+# Installations on Pi
 ```
 sudo su -
+
+# update every installed package and fix if something is broken
+apt update
+apt upgrade
+dpkg --configure -a
+apt --fix-broken install
+apt upgrade
+
+cd /boot
+cp config.txt config.txt.bak
+vi config.txt
+reboot
+
+# install motionEye and some dependencies
+apt install vim ffmpeg v4l-utils libjpeg-dev libssl-dev libcurl4-openssl-dev python-dev nginx
+pip install pycurl pytz motioneye sqlalchemy
+apt install python-pandas python-mysqldb ipython
+
+mkdir /home/pi/motioneye/etc
+cp /usr/local/share/motioneye/extra/motioneye.conf.sample /home/pi/motioneye/etc/motioneye.conf
+vi /home/pi/motioneye/etc/motioneye.conf 
+# this should be under /home/pi/motioneye but will be ignored by media_path
+mkdir /var/lib/motioneye
+cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
+
+# make the cam working:
+modprobe bcm2835-v4l2
+ls /dev/video0 
+vi /etc/modules
+
+# install actual package of motion
+wget https://github.com/Motion-Project/motion/releases/download/release-4.2.1/stretch_motion_4.2.1-1_amd64.deb
+apt install libmicrohttpd12
+dpkg -i ./pi_stretch_motion_4.2.1-1_armhf.deb
+
+systemctl daemon-reload
+systemctl enable motioneye
+systemctl start motioneye
+
+# install mariadb and clients and timezone support
+apt install mariadb-client mariadb-server
+mysql_tzinfo_to_sql  /usr/share/zoneinfo/Europe/Berlin 'Europe/Berlin' | mysql -u root mysql
+mysql_tzinfo_to_sql  /usr/share/zoneinfo/UTC 'UTC' | mysql -u root mysql
+
+# nfs to export motion pics
+apt install nfs-kernel-server
+echo "/home/pi/motioneye/pics/ *(rw,sync,no_subtree_check,all_squash)" >> /etc/exports
+service nfs-kernel-server restart
+
 cp raspberry/system/etc/sytemd/system/flask.service /etc/systemd/system/
 systemctl daemon-reload
 systemctl enable flask

@@ -44,47 +44,7 @@ The CSI bus is capable of extremely high data rates, and it exclusively carries 
 
 
 ## First Commands on The Pi
-```
-sudo su -
-
-# update every installed package and fix if something is broken
-apt update
-apt upgrade
-dpkg --configure -a
-apt --fix-broken install
-apt upgrade
-
-cd /boot
-cp config.txt config.txt.bak
-vi config.txt
-reboot
-
-# install motionEye and some dependencies
-apt install vim ffmpeg v4l-utils libjpeg-dev libssl-dev libcurl4-openssl-dev python-dev nginx
-pip install pycurl pytz motioneye sqlalchemy
-apt install python-pandas python-mysqldb ipython
-
-mkdir /home/pi/motioneye/etc
-cp /usr/local/share/motioneye/extra/motioneye.conf.sample /home/pi/motioneye/etc/motioneye.conf
-vi /home/pi/motioneye/etc/motioneye.conf 
-# this should be under /home/pi/motioneye but will be ignored by media_path
-mkdir /var/lib/motioneye
-cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
-
-# make the cam working:
-modprobe bcm2835-v4l2
-ls /dev/video0 
-vi /etc/modules
-
-# install actual package of motion
-wget https://github.com/Motion-Project/motion/releases/download/release-4.2.1/stretch_motion_4.2.1-1_amd64.deb
-apt install libmicrohttpd12
-dpkg -i ./pi_stretch_motion_4.2.1-1_armhf.deb
-
-systemctl daemon-reload
-systemctl enable motioneye
-systemctl start motioneye
-```
+see [Raspberry Pi Readme](raspberry/README.md)
 
 
 ## Motion Mysql Setup
