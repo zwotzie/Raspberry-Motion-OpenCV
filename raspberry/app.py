@@ -63,6 +63,7 @@ def catcam(days):
 
     data_cats = []
     data_others = []
+
     for classification in df['classification'].unique():
         dfp = df[df['classification'] == classification]
         part = go.Bar(
@@ -75,34 +76,34 @@ def catcam(days):
         else:
             data_others.append(part)
 
-        layoutCats = dict(
-            title="Minz, Dottie, andere Katze(?) (%d Tage)" % days,
-            xaxis=dict(
-                range=[x_from, x_to]),
-            yaxis=dict(
-                title='Minuten'
-            ),
-            showlegend=True,
-            # legend=dict(orientation="h")
-        )
-        layoutOthers = dict(
-            title="Maus und unbekannte Events (%d Tage)" % days,
-            xaxis=dict(
-                range=[x_from, x_to]),
-            yaxis=dict(
-                title='Minuten'
-            ),
-            showlegend=True,
-            # legend=dict(orientation="h")
-        )
+    layoutCats = dict(
+        title="Minz, Dottie, andere Katze(?) (%d Tage)" % days,
+        xaxis=dict(
+            range=[x_from, x_to]),
+        yaxis=dict(
+            title='Minuten'
+        ),
+        showlegend=True,
+        # legend=dict(orientation="h")
+    )
+    layoutOthers = dict(
+        title="Maus und unbekannte Events (%d Tage)" % days,
+        xaxis=dict(
+            range=[x_from, x_to]),
+        yaxis=dict(
+            title='Minuten'
+        ),
+        showlegend=True,
+        # legend=dict(orientation="h")
+    )
 
-        figCats = dict(data=data_cats, layout=layoutCats)
-        figOthers = dict(data=data_others, layout=layoutOthers)
+    figCats = dict(data=data_cats, layout=layoutCats)
+    figOthers = dict(data=data_others, layout=layoutOthers)
 
-        graphJSONCats = json.dumps(figCats, cls=plotly.utils.PlotlyJSONEncoder)
-        graphJSONothers = json.dumps(figOthers, cls=plotly.utils.PlotlyJSONEncoder)
-        df.sort_values(by='start_time', inplace=True, ascending=False)
-        htmltable=df.to_html(index=False, classes="table table-striped table-bordered table-hover table-sm")
+    graphJSONCats = json.dumps(figCats, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSONothers = json.dumps(figOthers, cls=plotly.utils.PlotlyJSONEncoder)
+    df.sort_values(by='start_time', inplace=True, ascending=False)
+    htmltable=df.to_html(index=False, classes="table table-striped table-bordered table-hover table-sm")
 
     return graphJSONCats, graphJSONothers, htmltable
 
