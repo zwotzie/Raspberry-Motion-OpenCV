@@ -6,4 +6,5 @@ source /home/pi/py3/bin/activate
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd ${BASEDIR}
 
-python app.py
+exec gunicorn -b 0.0.0.0:5000 --workers=1 --access-logfile - --error-logfile - app:app
+# python app.py
