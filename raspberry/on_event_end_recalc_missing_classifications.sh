@@ -11,5 +11,6 @@ ids=$(sudo mysql -u motion -p'mypasswordformotion!' -h localhost motion -e "sele
 
 for event_id in $ids; do
     # run in background and with low niceness:
+    echo "recalc event_id: ${event_id}"
     nice -10 python ${BASEDIR}/on_event_end_tf.py ${event_id}
 done
