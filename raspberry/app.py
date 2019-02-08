@@ -57,6 +57,7 @@ def index(days=1):
 
 
 def catcam(days):
+    db = create_engine('mysql://motion:mypasswordformotion!@' + MYSQL_HOST + '/motion')
     df = pd.read_sql_query(stmt % days, db, )
     x_to = datetime.now()
     x_from = x_to - timedelta(days=days)
