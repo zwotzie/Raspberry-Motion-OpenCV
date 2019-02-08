@@ -9,7 +9,7 @@ export PYTHONPATH=${PYTHONPATH}:/home/pi/models/research/:/home/pi/models/resear
 
 ids=$(sudo mysql -u motion -p'mypasswordformotion!' -h localhost motion -e "select event_id from motion_events where number_of_images is null" | grep -v event_id)
 
-for id in $ids; do
+for event_id in $ids; do
     # run in background and with low niceness:
     nice -10 python ${BASEDIR}/on_event_end_tf.py ${event_id}
 done
