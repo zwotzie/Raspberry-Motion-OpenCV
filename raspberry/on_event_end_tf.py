@@ -18,7 +18,7 @@ IMAGE_PATH_REPLACE = os.getenv('IMAGE_PATH_REPLACE')
 FROZEN_INFERENCE_GRAPH_LOC = BASEPATH + "/exported_model/frozen_inference_graph.pb"
 LABELS_LOC = BASEPATH + "/training_data/" + "label_map.pbtxt"
 
-MYSQL_HOST = os.getenv('MYSQL_HOST', 'localhost')
+MYSQL_HOST = os.getenv('MYSQL_HOST', 'catcam.fritz.box')
 db = create_engine('mysql://motion:mypasswordformotion!@' + MYSQL_HOST + '/motion')
 metadata = MetaData(db)
 

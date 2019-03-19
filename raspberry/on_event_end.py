@@ -4,8 +4,10 @@ from sqlalchemy import create_engine
 from sqlalchemy import Table, MetaData
 import pandas as pd
 from sys import argv, exit
+import os
 
-db = create_engine('mysql://motion:mypasswordformotion!@localhost/motion')
+MYSQL_HOST = os.getenv('MYSQL_HOST', 'catcam.fritz.box')
+db = create_engine('mysql://motion:mypasswordformotion!@' + MYSQL_HOST + '/motion')
 metadata = MetaData(db)
 
 # debug mode in ipython, otherwise False!
