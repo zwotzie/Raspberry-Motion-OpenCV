@@ -44,7 +44,7 @@ def set_motion_evens_values(event_id):
     if changed_pixels_median < 10000:
         classification='mouse'
 
-    print event_id, number_of_images, start_time, end_time, changed_pixels_median, classification
+    print(event_id, number_of_images, start_time, end_time, changed_pixels_median, classification)
 
     motion_events.update(motion_events.c.event_id == event_id).execute(
         changed_pixels_median=changed_pixels_median
