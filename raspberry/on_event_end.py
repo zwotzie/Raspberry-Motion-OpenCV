@@ -57,7 +57,7 @@ def get_int(s):
         return int(s)
 
 if len(argv) != 2:
-    print "Usage: on_event_end.py ['all', <event_id>]"
+    print("Usage: on_event_end.py ['all', <event_id>]")
     exit(1)
 elif argv[1] == 'all':
     df = pd.read_sql_query('SELECT * FROM motion_events', db)
