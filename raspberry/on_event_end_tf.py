@@ -122,6 +122,12 @@ def set_motion_events_values(event_id):
                     df.loc[idx, 'score'] = score
                     df.loc[idx, 'class'] = classification
 
+                    # update the images metadata with classification and score
+                    motion_events.update(images.c.id == df.loc[idx, 'id']).execute(
+                        classification=classification
+                        , score=score
+                    )
+
         # pdSeries = df.groupby('class')['score'].mean()
         # df2 = pd.DataFrame({'class': pdSeries.index, 'score': pdSeries.values})
         try:
