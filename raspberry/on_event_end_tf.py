@@ -8,6 +8,7 @@ from sys import argv, exit
 import cv2
 import tensorflow as tf
 from object_detection.utils import label_map_util
+from object_detection.utils import visualization_utils as vis_util
 import os
 
 
@@ -98,6 +99,19 @@ def set_motion_events_values(event_id):
                         [detection_boxes, detection_scores, detection_classes, num_detections],
                         feed_dict={image_tensor: image_np_expanded})
 
+                    vis_util.visualize_boxes_and_labels_on_image_array(
+                        image_np,
+                        np.squeeze(boxes),
+                        np.squeeze(classes).astype(np.int32),
+                        np.squeeze(scores),
+                        category_index,
+                        use_normalized_coordinates=True,
+                        line_thickness=8,
+                        min_score_thresh=0.20)
+
+                    # overwrite the image with tensorflow information
+                    cv2.imwrite(image_path, image_np)
+
                     objects = []
                     threshold = 0.2  # in order to get higher percentages you need to lower this number; usually at 0.01 you get 100% predicted objects
                     for index, value in enumerate(classes[0]):
@@ -127,6 +141,9 @@ def set_motion_events_values(event_id):
                         classification=classification
                         , score=score
                     )
+
+                    image_np = None
+                    image_np_expanded = None
 
         # pdSeries = df.groupby('class')['score'].mean()
         # df2 = pd.DataFrame({'class': pdSeries.index, 'score': pdSeries.values})
