@@ -24,7 +24,7 @@ db = create_engine('mysql://motion:mypasswordformotion!@' + MYSQL_HOST + '/motio
 metadata = MetaData(db)
 
 # debug mode in ipython, otherwise False!
-db.echo = True
+# db.echo = True
 
 images = Table('images', metadata, autoload=True)
 motion_events = Table('motion_events', metadata, autoload=True)
