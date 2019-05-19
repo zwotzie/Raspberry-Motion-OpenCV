@@ -81,6 +81,9 @@ def set_motion_events_values(event_id):
                 for image_path in df['filename']:
                     # /home/pi/motioneye/pics/2019-05-19/4177/15-29-47.03.4177.764.1198.290.599.jpg
 
+                    max_scored_image_id = -1
+                    max_score = 0
+
                     image_np = cv2.imread(image_path)
 
                     # Definite input and output Tensors for detection_graph
@@ -141,6 +144,10 @@ def set_motion_events_values(event_id):
                     df.loc[idx, 'score'] = score
                     df.loc[idx, 'class'] = classification
 
+                    if score > max_score:
+                        max_scored_image_id = df.loc[idx, 'id']
+                        max_score = score
+
                     # update the images metadata with classification and score
                     images.update(images.c.id == df.loc[idx, 'id']).execute(
                         classification=classification
@@ -160,7 +167,6 @@ def set_motion_events_values(event_id):
         except ValueError: #attempt to get argmax of an empty sequence
             classification = 'unknown'
 
-
     print(event_id, number_of_images, start_time, end_time, changed_pixels_median, classification)
 
     motion_events.update(motion_events.c.event_id == event_id).execute(
@@ -168,7 +174,8 @@ def set_motion_events_values(event_id):
     #    , start_time=start_time
         , end_time=end_time
         , number_of_images=number_of_images
-        , classification=classification)
+        , classification=classification
+        , image_id=max_scored_image_id)
 
 
 def get_int(s):
