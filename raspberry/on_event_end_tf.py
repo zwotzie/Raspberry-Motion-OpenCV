@@ -24,7 +24,7 @@ db = create_engine('mysql://motion:mypasswordformotion!@' + MYSQL_HOST + '/motio
 metadata = MetaData(db)
 
 # debug mode in ipython, otherwise False!
-# db.echo = True
+db.echo = True
 
 images = Table('images', metadata, autoload=True)
 motion_events = Table('motion_events', metadata, autoload=True)
@@ -112,6 +112,9 @@ def set_motion_events_values(event_id):
 
                     # overwrite the image with tensorflow information
                     image_path_new = image_path.replace('pics', 'pics_classified')
+                    image_dir = os.path.dirname(os.path.realpath(image_path_new))
+                    if not os.direxists(image_dir):
+                        os.mkdir(image_dir)
                     cv2.imwrite(image_path_new, image_np)
 
                     objects = []
