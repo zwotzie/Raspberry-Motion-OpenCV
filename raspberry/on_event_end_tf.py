@@ -81,7 +81,7 @@ def set_motion_events_values(event_id):
                 for image_path in df['filename']:
                     # /home/pi/motioneye/pics/2019-05-19/4177/15-29-47.03.4177.764.1198.290.599.jpg
 
-                    max_scored_image_id = -1
+                    max_scored_image_id = None
                     max_score = 0
 
                     image_np = cv2.imread(image_path)
