@@ -114,7 +114,7 @@ def set_motion_events_values(event_id):
                     image_path_new = image_path.replace('pics', 'pics_classified')
                     image_dir = os.path.dirname(os.path.realpath(image_path_new))
                     if not os.path.isdir(image_dir):
-                        os.mkdir(image_dir)
+                        os.makedirs(image_dir)
                     cv2.imwrite(image_path_new, image_np)
 
                     objects = []
