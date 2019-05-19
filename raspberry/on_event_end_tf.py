@@ -144,6 +144,10 @@ def set_motion_events_values(event_id):
                     df.loc[idx, 'score'] = score
                     df.loc[idx, 'class'] = classification
 
+                    if max_scored_image_id is None:
+                        # set to first sample(!)
+                        max_scored_image_id = df.loc[idx, 'id']
+
                     if score > max_score:
                         max_scored_image_id = df.loc[idx, 'id']
                         max_score = score
