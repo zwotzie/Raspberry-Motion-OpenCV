@@ -79,6 +79,7 @@ def set_motion_events_values(event_id):
         with detection_graph.as_default():
             with tf.Session(graph=detection_graph) as sess:
                 for image_path in df['filename']:
+                    # /home/pi/motioneye/pics/2019-05-19/4177/15-29-47.03.4177.764.1198.290.599.jpg
 
                     image_np = cv2.imread(image_path)
 
@@ -110,7 +111,8 @@ def set_motion_events_values(event_id):
                         min_score_thresh=0.20)
 
                     # overwrite the image with tensorflow information
-                    cv2.imwrite(image_path, image_np)
+                    image_path_new = image_path.replace('pics', 'pics_classified')
+                    cv2.imwrite(image_path_new, image_np)
 
                     objects = []
                     threshold = 0.2  # in order to get higher percentages you need to lower this number; usually at 0.01 you get 100% predicted objects
